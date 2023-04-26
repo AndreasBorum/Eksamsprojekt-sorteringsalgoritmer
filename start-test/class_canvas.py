@@ -1,26 +1,94 @@
 import tkinter as tk
 
-color = ['blue', 'red']
-
-class draw_canvas():
+class Canvas_animation():
     def __init__(self, master):
         self.master = master
         self.cx, self.cy = 500, 400
         self.canvas = tk.Canvas(master, width=self.cx, height=self.cy, bg='gray75')
         self.canvas.pack()
 
-        self.rects([[1,2,3,6,7,8,9,10], 1,[]])
 
-    def rects(self, data):
-        number_of_rects = len(data[0])
-        margin = (self.cx-self.cx*0.9)/2
-        coll_width = (self.cx-margin*2)/number_of_rects
-        a = self.cy*0.8/max(data[0])
-        print(a)
+    def load_data(self, data_in):
+        """
+        function to load data on canvas
+        :param data: list of numbers to be displayed on canvas
+        :return: list of rectangles on canvas
+        """
+        self.canvas.delete('all')
+        self.data = data_in[:]
+        number_of_rects = len(self.data)
+        self.margin_x = (self.cx*0.1)/2
+        
+        self.margin_yb = self.cy*0.2
+        self.margin_yt = self.cy*0.1
+        self.margin_y = self.margin_yb+self.margin_yt
+        
+        self.a = (self.cy-self.margin_y)/max(self.data)
+     
+
+        self.coll_width = (self.cx-self.margin_x*2)/number_of_rects
+
+        self.pos_y = self.cy-self.margin_yb
+
+        self.draw_rects(self.data)
+
+    def pos_x(self, i):
+        return self.coll_width*i+self.margin_x
+
+    def hight(self, i):
+        return self.cy-self.margin_yb-self.data[i]*self.a
 
 
-        for i, j in enumerate(data[0]):
-            if i in data[2]:
-                self.canvas.create_rectangle(coll_width*i+margin, self.cy*0.9-j*a, coll_width*i+margin+coll_width, self.cy*0.9, fill=color[data[1]])
-            else:
-                coll=self.canvas.create_rectangle(coll_width*i+margin, self.cy*0.9-j*a, coll_width*i+margin+coll_width, self.cy*0.9, fill='gray75')
+
+    def draw_rects(self, data):
+        """
+        function to draw rectangles on canvas
+        :param data: list of numbers to be displayed on canvas
+        """
+
+        self.columns=[]
+        for i, j in enumerate(data):
+            column_id = self.canvas.create_rectangle(self.pos_x(i), self.pos_y, self.pos_x(i)+self.coll_width, self.hight(i), fill='gray75', tags=('tag'+str(j)))
+            self.canvas.create_text(self.pos_x(i)+self.coll_width/2, self.pos_y-10, text=j, tags=('tag'+str(j)))
+            #self.canvas.addtag_withtag("tag5", (column_id, text_id))
+            self.columns.append((column_id, "tag"+str(j)))
+
+    
+    def compare(self, i1, i2):
+        """function to highlight the rectangles that are being compared"""
+        self.canvas.itemconfig(self.columns[i1][0], fill='gray50')
+        self.canvas.itemconfig(self.columns[i2][0], fill='gray50')
+
+    def before_swap(self, i1, i2):
+        """function to swap the rectangles that are being compared"""
+        self.canvas.itemconfig(self.columns[i1][0], fill='red')
+        self.canvas.itemconfig(self.columns[i2][0], fill='blue')
+
+    def after_swap(self, i1, i2):
+        """function to swap the rectangles"""
+
+        self.canvas.abs_move(self.columns[i1][1], self.pos_x(i2), self.hight(i1))
+        self.canvas.abs_move(self.columns[i2][1], self.pos_x(i1), self.hight(i2))
+        self.columns[i1], self.columns[i2] = self.columns[i2], self.columns[i1]
+        self.data[i1], self.data[i2] = self.data[i2], self.data[i1]
+
+
+
+class Canvas_animation2(Canvas_animation):
+    def __init__(self, master):
+        super().__init__(master)
+        self.pivot =self.canvas.create_line(0,0,0,0, arrow=tk.LAST)
+    
+    def move_pivot(self, i):
+        """funktion to move arrow/pivot"""
+        self.canvas.coords(self.pivot, self.pos_x(i)+self.coll_width/2, self.cy-10, self.pos_x(i)+self.coll_width/2, self.cy-50)
+        self.canvas.update()
+
+#https://stackoverflow.com/questions/66918142/another-method-to-move-canvas-objects
+def abs_move(self, _object, new_x, new_y):
+    # Get the current object position
+    x, y, *_ = self.bbox(_object)
+    # Move the object
+    self.move(_object, new_x-x-1, new_y-y-1)
+# Monkey patch the `abs_move` method
+tk.Canvas.abs_move = abs_move
