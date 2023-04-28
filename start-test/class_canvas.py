@@ -64,13 +64,29 @@ class Canvas_animation():
         self.canvas.itemconfig(self.columns[i1][0], fill='red')
         self.canvas.itemconfig(self.columns[i2][0], fill='blue')
 
-    def after_swap(self, i1, i2):
+    def swap(self, i1, i2):
         """function to swap the rectangles"""
-
         self.canvas.abs_move(self.columns[i1][1], self.pos_x(i2), self.hight(i1))
         self.canvas.abs_move(self.columns[i2][1], self.pos_x(i1), self.hight(i2))
         self.columns[i1], self.columns[i2] = self.columns[i2], self.columns[i1]
         self.data[i1], self.data[i2] = self.data[i2], self.data[i1]
+
+
+    def after_swap(self, i1, i2):
+        """function to swap the rectangles"""
+        self.canvas.itemconfig(self.columns[i1][0], fill='blue')
+        self.canvas.itemconfig(self.columns[i2][0], fill='red')
+
+
+    def clear_color(self):
+        """function to clear the color of all rectangles"""
+        for i in self.columns:
+            self.canvas.itemconfig(i[0], fill='gray75')
+
+    def done(self):
+        """function to set the color of all rectangles to green"""
+        for i in self.columns:
+            self.canvas.itemconfig(i[0], fill='green')
 
 
 
