@@ -44,45 +44,52 @@ class App(ctk.CTk):
         self.bt_Quit.grid(row=9, column=0, padx=20, pady=10)
         
         # button to select correct frame IN self.left_side_panel WIDGET
-        self.bt_dashboard = ctk.CTkButton(self.left_side_panel, text="Dashboard", command=self.dash)
+        self.bt_dashboard = ctk.CTkButton(self.left_side_panel, text="Dashboard")
         self.bt_dashboard.grid(row=1, column=0, padx=20, pady=10)
 
-        self.bt_statement = ctk.CTkButton(self.left_side_panel, text="Statement", command=self.statement)
+        self.bt_statement = ctk.CTkButton(self.left_side_panel, text="Statement")
         self.bt_statement.grid(row=2, column=0, padx=20, pady=10)
         
-        self.bt_categories = ctk.CTkButton(self.left_side_panel, text="Manage Categories", command=self.categories)
+        self.bt_categories = ctk.CTkButton(self.left_side_panel, text="Manage Categories")
         self.bt_categories.grid(row=3, column=0, padx=20, pady=10)
         
 
         # right side panel -> have self.right_dashboard inside it
         self.right_side_panel = ctk.CTkFrame(self.main_container, corner_radius=10, fg_color="#000811")
         self.right_side_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
+
         
-        #self.right_dashboard.pack(in_=self.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
         #self.right_dashboard = ctk.CTkFrame(self.main_container, corner_radius=10, fg_color="blue")
-
-        home_page = HomePage(self)
-
-    #  self.right_dashboard   ----> dashboard widget  
-    def dash(self):
+        #self.right_dashboard.pack(in_=self.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
         
-        self.clear_frame()
-        self.bt_from_frame1 = ctk.CTkButton(self.right_dashboard, text="dash", command=lambda:print("test dash") )
-        self.bt_from_frame1.grid(row=0, column=0, padx=20, pady=(10, 0))
-        self.bt_from_frame2 = ctk.CTkButton(self.right_dashboard, text="dash 1", command=lambda:print("test dash 1" ) )
-        self.bt_from_frame2.grid(row=1, column=0, padx=20, pady=(10, 0))
 
-    #  self.right_dashboard   ----> statement widget
-    def statement(self):
-        self.clear_frame()
-        self.bt_from_frame3 = ctk.CTkButton(self.right_dashboard, text="statement", command=lambda:print("test statement") )
-        self.bt_from_frame3.grid(row=0, column=0, padx=20, pady=(10, 0))
-        
-    #  self.right_dashboard   ----> categories widget
-    def categories(self):
-        self.clear_frame()
-        self.bt_from_frame4 = ctk.CTkButton(self.right_dashboard, text="categories", command=lambda:print("test cats") )
-        self.bt_from_frame4.grid(row=0, column=0, padx=20, pady=(10, 0))
+        # initializing frames to an empty array
+        self.frames = {} 
+  
+        # iterating through a tuple consisting
+        # of the different page layouts
+        for F in (HomePage, StartPage):
+            frame = F(self)
+  
+            # initializing frame of that object from
+            # startpage, page1, page2 respectively with
+            # for loop
+            self.frames[F] = frame
+  
+            
+
+
+
+            #frame.pack(in_=self.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
+  
+        self.show_frame(HomePage)
+  
+    # to display the current frame passed as
+    # parameter
+    def show_frame(self, cont):
+        frame = self.frames[cont]
+        frame.pack(in_=self.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
+
 
 
     # Change scaling of all widget 80% to 120%
@@ -105,12 +112,25 @@ class App(ctk.CTk):
 
 class HomePage(ctk.CTkFrame):
     def __init__(self, app):
-        super().__init__(app.main_container, corner_radius=10, fg_color="blue")
+        super().__init__(app.right_side_panel, corner_radius=10, fg_color="blue")
 
-        self.pack(in_=app.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
+        #self.pack(in_=app.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
 
         self.label = ctk.CTkLabel(self, text="Home Page")
         self.label.pack(padx=10, pady=10)
+        self.canvas = tk.Canvas(self, width=100, height=100, bg='gray75')
+        self.canvas.pack()
+
+
+class StartPage(ctk.CTkFrame):
+    def __init__(self, app):
+        super().__init__(app.right_side_panel, corner_radius=10, fg_color="blue")
+
+        #self.pack(in_=app.right_side_panel, side=tk.TOP, fill=tk.BOTH, expand=True, padx=0, pady=0)
+
+        self.label = ctk.CTkLabel(self, text="Start Page")
+        self.label.pack(padx=10, pady=10)
+
 
 
 a = App()
