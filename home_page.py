@@ -1,18 +1,15 @@
 import customtkinter as ctk
-from style import classes_style as style
-
+import  tkinter as tk
+import style
+import long_text
 
 class HomePage(ctk.CTkFrame):
-    """Home page class that is a tk frame"""
+    def __init__(self, app):
+        super().__init__(app.right_side_panel, **style.frame_style)
 
-    def __init__(self, parent, master):
-        super().__init__(parent)
-        self.parent = parent
 
-        # temp
-        page_label = ctk.CTkLabel(self, text="Home Page")
-        page_label.grid(row=0, column=0, columnspan=2)
+        self.header_label = ctk.CTkLabel(self, text="Home Page", text_color="black", font=ctk.CTkFont(size=20, weight="bold"))
+        self.header_label.grid(row=0, column=0, pady=10, padx=10)
 
-        # welcome lable
-        welcome_label = ctk.CTkLabel(self, text='Velkommen')
-        welcome_label.grid(row=1, column=0, padx=30, sticky='N')
+        self.description_label = ctk.CTkLabel(self, text=long_text.home_page_text, text_color="black", font=ctk.CTkFont(size=14), wraplength=200, justify=tk.CENTER)
+        self.description_label.grid(row=1, column=0, pady=10, padx=10)
