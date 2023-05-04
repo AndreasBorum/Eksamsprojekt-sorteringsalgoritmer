@@ -82,7 +82,7 @@ class App(ctk.CTk):
   
             frame.grid(in_=self.right_side_panel, row = 0, column = 0, sticky ="nsew")          
 
-        self.show_frame(HomePage)
+        self.show_frame(BubblesortPage)
 
 
     # to display the current frame passed as
