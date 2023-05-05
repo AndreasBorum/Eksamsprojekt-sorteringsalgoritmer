@@ -1,10 +1,10 @@
 import customtkinter as ctk
 import  tkinter as tk
 import style
-from canvas_animation import CanvasAnimation
+from animation.canvas_animation import CanvasAnimation
 
 class AnimationFrame(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, sorting_type):
         super().__init__(parent, highlightbackground="blue", highlightthickness=2)
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
@@ -12,7 +12,7 @@ class AnimationFrame(tk.Frame):
         self.animation_state = False
         self.animation_play_state = False
 
-        self.canvas=CanvasAnimation(self)
+        self.canvas=sorting_type(self)
         self.canvas.grid(row=0, column=0, pady=10, columnspan=2, padx=10, sticky="nsew")
 
         self.start_frame = tk.Frame(self, highlightbackground="blue", highlightthickness=2)
@@ -21,7 +21,7 @@ class AnimationFrame(tk.Frame):
         self.start_btn = ctk.CTkButton(self.start_frame, text="Start", command=self.start_stop_animation)
         self.start_btn.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
-        self.start_slider = ctk.CTkSlider(self.start_frame, from_=4, to=30, command=self.update_canavs_culumns)
+        self.start_slider = ctk.CTkSlider(self.start_frame, from_=4, to=30, command=self.update_canavs_start_culumns)
         self.start_slider.grid(row=1, column=0, pady=10, padx=10, sticky="nsew")        
 
 
@@ -31,7 +31,7 @@ class AnimationFrame(tk.Frame):
         self.play_switch = ctk.CTkSwitch(self.play_frame, text="Play", command=self.play_pause_animation)
         self.play_switch.grid(row=0, column=0, pady=10, columnspan=2, padx=10, sticky="nsew")
 
-        self.animation_speed = ctk.CTkSlider(self.play_frame, from_=0, to=100, command=self.animation_speed)
+        self.animation_speed = ctk.CTkSlider(self.play_frame, from_=0, to=100, number_of_steps=100, command=self.animation_speed)
         self.animation_speed.grid(row=1, column=0, pady=10, columnspan=2,padx=10, sticky="nsew")
 
         self.animation_step_forward_btn = ctk.CTkButton(self.play_frame, text="Step Forward", command=self.animation_step_forward)
@@ -43,7 +43,7 @@ class AnimationFrame(tk.Frame):
         for widget in self.play_frame.winfo_children():
             widget.configure(state="disabled")
 
-        self.canvas.update_start_columns(self.start_slider.get())
+        self.update_canavs_start_culumns(self.start_slider.get())
 
     def start_stop_animation(self):
         """called when start stop button is pressed. if amnimation_state is False it will generate data and disable start_slider and enable animation controles. 
@@ -59,7 +59,7 @@ class AnimationFrame(tk.Frame):
             self.animation_step_forward_btn.configure(state="disabled")
             self.animation_step_back_btn.configure(state="disabled")
 
-            self.canvas.update_start_columns(self.start_slider.get())
+            self.update_canavs_start_culumns(self.start_slider.get())
 
         elif not self.animation_state:
             self.animation_state = True
@@ -70,11 +70,11 @@ class AnimationFrame(tk.Frame):
             self.animation_step_forward_btn.configure(state="normal")
             self.animation_step_back_btn.configure(state="normal")
 
-            self.canvas.generate_data()
+            self.canvas.generate_data(round(self.start_slider.get()))
 
 
-    def update_canavs_culumns(self, value):
-        self.canvas.update_start_columns(value)
+    def update_canavs_start_culumns(self, value):
+        self.canvas.update_start_columns(round(value))
 
     def play_pause_animation(self):
         pass
@@ -83,9 +83,9 @@ class AnimationFrame(tk.Frame):
         pass
 
     def animation_step_forward(self):
-        pass
+        self.canvas.animation_step_forward()
 
     def  animation_step_back(self):
-        pass
+        self.canvas.animation_step_back()
 
     
