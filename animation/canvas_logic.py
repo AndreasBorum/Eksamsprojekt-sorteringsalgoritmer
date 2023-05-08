@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+import time
+
 
 class CanvasLogic(ABC):
 
@@ -7,9 +9,11 @@ class CanvasLogic(ABC):
         self.start_columns = columns
         self.draw_columns_defore_start(self.start_columns)
 
-    def play_pause_animation(self):
-        """called when play/pause  btn is clicked. starts/stops the animation"""
-        pass
+    def play_pause_animation(self, speed):
+        """called when play/pause  btn is clicked. plays/pauses the animation"""
+        for i in range(10):
+            self.animation_step_forward()
+
 
     def animation_speed(self, speed):
         """called when the animation speed is changed. Changes the animation speed"""
@@ -17,33 +21,31 @@ class CanvasLogic(ABC):
 
     def animation_step_forward(self):
         """called when the step forward btn is clicked. moves the animation forward one step"""
-        self.step_counter +=1
+        self.step_counter += 1
 
-        print(self.step_counter)
         if self.step_counter == len(self.instruction_steps):
-            self.step_counter -=1
+            self.step_counter -= 1
             return
 
-        
         match self.instruction_steps[self.step_counter]:
-            case [0,x,y]:
+            case [0, x, y]:
                 self.clear_color()
-                self.compare(x,y)
-            case [1,x,y]:
+                self.compare(x, y)
+            case [1, x, y]:
                 self.clear_color()
-                self.before_swap(x,y)
-            case [2,x,y]:
-                self.swap(x,y)
-                self.after_swap(x,y)
+                self.before_swap(x, y)
+            case [2, x, y]:
+                self.swap(x, y)
+                self.after_swap(x, y)
             case [3]:
                 self.done()
             case _:
-                self.animation_extra_step_forward(self.instruction_steps[self.step_counter])
+                self.animation_extra_step_forward(
+                    self.instruction_steps[self.step_counter])
 
     def animation_step_back(self):
         """called when the step back btn is clicked. moves the animation back one step"""
-        self.step_counter -=1
-        print(self.step_counter)
+        self.step_counter -= 1
 
         if self.step_counter == -1:
             self.clear_color()
@@ -51,21 +53,22 @@ class CanvasLogic(ABC):
         elif self.step_counter < -1:
             self.step_counter = -1
             return
-        
-        match self.instruction_steps[self.step_counter]:
-            case [0,x,y]:
-                self.clear_color()
-                self.compare(x,y)
-            case [1,x,y]: 
-                self.swap(x,y)
-                self.before_swap(x,y)
-            case [2,x,y]:
-                self.clear_color()
-                self.after_swap(x,y)
-            case _:
-                self.animation_extra_step_back(self.instruction_steps[self.step_counter])
 
-    def import_instruction_steps(self, steps):
+        match self.instruction_steps[self.step_counter]:
+            case [0, x, y]:
+                self.clear_color()
+                self.compare(x, y)
+            case [1, x, y]:
+                self.swap(x, y)
+                self.before_swap(x, y)
+            case [2, x, y]:
+                self.clear_color()
+                self.after_swap(x, y)
+            case _:
+                self.animation_extra_step_back(
+                    self.instruction_steps[self.step_counter])
+
+    def unpack_instruction_steps(self, steps):
         """Imports the instruction steps"""
         self.instruction_steps = []
         for step in steps:
@@ -75,13 +78,15 @@ class CanvasLogic(ABC):
                 self.instruction_steps.append(step)
 
         self.step_counter = -1
+        self.animation_state =False
 
-        print(self.instruction_steps)
+    def generate_data_from_algorithm(self, algorithm, size):
+        """called when start btn is clicked. takes the number of columns and calls the algorithm."""
+        data = algorithm(size)
+        self.draw_columns_after_start(data[0])
+        self.unpack_instruction_steps(data[1])
 
-
-
-    #----------------- abstract methods -----------------
-
+    # ----------------- abstract methods -----------------
 
     @abstractmethod
     def animation_extra_step_back(self, step):
@@ -92,8 +97,8 @@ class CanvasLogic(ABC):
         pass
 
     @abstractmethod
-    def generate_data(self):
-        """called when start btn is clicked. takes the number of columns and calls the algorithm."""
+    def generate_data(self, size):
+        """function to generate the data"""
         pass
 
     @abstractmethod
@@ -113,6 +118,7 @@ class CanvasLogic(ABC):
     def before_swap(self, i1, i2):
         """function to swap the rectangles that are being compared"""
         pass
+
     @abstractmethod
     def swap(self, i1, i2):
         """function to swap the rectangles"""
