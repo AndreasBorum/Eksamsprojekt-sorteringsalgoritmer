@@ -81,7 +81,7 @@ def quick_sort(len):
 
 
     arr = quick_sort_alg(arr, instructions)
-    instructions += [(3)]
+    instructions += [[3]]
 
     return originalArray, instructions
 
@@ -103,6 +103,6 @@ def bubble_sort(len):
 
 
     arr = bubble_sort_alg(arr, instructions)
-    instructions += [(3)]
+    instructions += [[3]]
 
     return originalArray, instructions
