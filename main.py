@@ -1,5 +1,7 @@
 import tkinter as tk
 import customtkinter as ctk
+from time import sleep
+
 from home_page import HomePage
 from intro_page import IntroPage
 from bubble_page import BubblesortPage
@@ -21,6 +23,7 @@ class App(ctk.CTk):
         self.title("Change Frames")
         self.geometry("800x600+10+10")
         self.after(0, lambda:self.state('zoomed'))
+        self.protocol("WM_DELETE_WINDOW", self.close_window)
         
         # root!
         self.main_container = ctk.CTkFrame(self, corner_radius=10)
@@ -94,7 +97,11 @@ class App(ctk.CTk):
     # to display the current frame passed as
     # parameter
     def show_frame(self, cont):
+        self.frames[BubblesortPage].animation_frame.canvas.animation_thread.unset_on_page()
+        self.frames[QuickSortPage].animation_frame.canvas.animation_thread.unset_on_page()
         frame = self.frames[cont]
+        if frame ==  self.frames[BubblesortPage] or frame == self.frames[QuickSortPage]:
+            frame.animation_frame.canvas.animation_thread.set_on_page()
         frame.tkraise()
 
 
@@ -106,6 +113,8 @@ class App(ctk.CTk):
         
     # close the entire window    
     def close_window(self): 
+            self.frames[BubblesortPage].animation_frame.canvas.animation_thread.close_thread()
+            self.frames[QuickSortPage].animation_frame.canvas.animation_thread.close_thread()
             App.destroy(self)
 
 
