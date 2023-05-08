@@ -28,7 +28,9 @@ class AnimationFrame(tk.Frame):
         self.play_frame = tk.Frame(self, highlightbackground="blue", highlightthickness=2)
         self.play_frame.grid(row=1, column=1, pady=10, padx=10, sticky="nsew")
 
-        self.play_switch = ctk.CTkSwitch(self.play_frame, text="Play", command=self.play_pause_animation)
+        self.switch_var = ctk.StringVar(value="on")
+        self.play_switch = ctk.CTkSwitch(self.play_frame, text="Play", command=self.play_pause_animation, variable=self.switch_var, onvalue="on", offvalue="off")
+        self.play_switch.deselect()
         self.play_switch.grid(row=0, column=0, pady=10, columnspan=2, padx=10, sticky="nsew")
 
         self.animation_speed = ctk.CTkSlider(self.play_frame, from_=0, to=100, number_of_steps=100, command=self.animation_speed)
@@ -77,7 +79,17 @@ class AnimationFrame(tk.Frame):
         self.canvas.update_start_columns(round(value))
 
     def play_pause_animation(self):
-        pass
+        if self.switch_var.get() == "on":
+            self.play_switch.configure(text="Pause")
+            self.animation_play_state = True
+            self.animation_step_forward_btn.configure(state="disabled")
+            self.animation_step_back_btn.configure(state="disabled")
+            self.canvas.play_pause_animation(1)
+        else:
+            self.play_switch.configure(text="Play")
+            self.animation_play_state = False
+            self.animation_step_forward_btn.configure(state="normal")
+            self.animation_step_back_btn.configure(state="normal")
 
     def animation_speed(self):
         pass

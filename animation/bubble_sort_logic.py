@@ -8,12 +8,7 @@ class BubbleSortLogic(CanvasLogic):
     
     def generate_data(self, size):
         """called when start btn is clicked. takes the number of columns and calls the algorithm."""
-        data= bobble_sort(size)
-        print(data)
-        print(size)
-
-        self.draw_columns_after_start(data[0])
-        self.import_instruction_steps(data[1])
+        self.generate_data_from_algorithm(bobble_sort, size)
 
     def animation_extra_step_back(self):
         pass
