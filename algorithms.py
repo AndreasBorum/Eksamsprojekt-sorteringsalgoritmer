@@ -1,4 +1,8 @@
-import random
+#   Instruction types
+    #   0: Comp
+    #   1: Swap
+    #   3: Done
+
 def quick_sort_alg(arr, instructions):
 
     if len(arr) <= 1:
@@ -14,7 +18,17 @@ def quick_sort_alg(arr, instructions):
                 greater.append(x)
         return quick_sort_alg(less, instructions) + [pivot] + quick_sort_alg(greater, instructions)
 
+def bubble_sort_alg(arr, instructions):
+    for num_of_sorted in range(len(arr)):
+        for j in range(len(arr)-num_of_sorted-1):
+            compare(arr[j], arr[j+1], arr, instructions)
+
+
 def compare(x, y, arr, instructions = []):
+    """
+        Returns true if x <= y
+        Returns false AND swaps x and y if x > y
+    """
     instructions += [(0, arr.index(x), arr.index(y))]
     if x <= y:
         return True
@@ -28,8 +42,9 @@ def swap(x, y, arr, instructions = []):
     x = y
     y = temp
 
+from random import randint as r_int
 def place_x_at_random_index(arr, x):
-    r = random.randint(0, arr.__len__() -1)
+    r = r_int(0, arr.__len__() -1)
     if(arr[r] == "_"):
         arr[r] = x
     else:
@@ -66,10 +81,28 @@ def quick_sort(len):
 
 
     arr = quick_sort_alg(arr, instructions)
-
     instructions += [(3)]
+
     return originalArray, instructions
 
 
-def bobble_sort(i):
-    return ([9,7,5,3,1,8,6,4,2],[[0,0,1],[0,1,2],[1,1,2],[0,2,3],[1,2,3], [3]])
+def bubble_sort(len):
+    """
+        This is the funtion used by other modules in the program.
+        It takes an integer "len" and returns a tuple containing two lists, 
+        1: The shuffled array
+        2: A list of instructions from the bubblesort algorithm.
+    """
+    originalArray = create_array(len)
+    arr = []
+    
+    for x in originalArray:
+        arr += [x]
+
+    instructions = []
+
+
+    arr = bubble_sort_alg(arr, instructions)
+    instructions += [(3)]
+
+    return originalArray, instructions
