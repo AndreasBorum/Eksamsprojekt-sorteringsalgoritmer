@@ -1,6 +1,8 @@
 import tkinter as tk
 
 from animation.canvas_logic import CanvasLogic
+from animation.animation_thread import  AnimationThread
+
 
 class CanvasAnimation(tk.Frame, CanvasLogic):
     def __init__(self, master):
@@ -18,6 +20,11 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
         self.margin_y = self.margin_yb+self.margin_yt
      
         self.pos_y = self.cy-self.margin_yb
+
+
+        self.animation_thread = AnimationThread(self)
+        self.animation_running = False
+        self.animation_speed = 1
 
     #------------------------------------------------------------------------------------------
 

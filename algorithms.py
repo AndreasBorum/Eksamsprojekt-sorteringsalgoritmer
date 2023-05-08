@@ -58,7 +58,7 @@ def create_array(len):
         arr += ["_"]
     
     for x in range(len):
-        place_x_at_random_index(arr, x)
+        place_x_at_random_index(arr, x+1)
             
     return arr
 

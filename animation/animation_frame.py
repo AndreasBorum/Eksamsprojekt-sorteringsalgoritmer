@@ -74,6 +74,10 @@ class AnimationFrame(tk.Frame):
 
             self.canvas.generate_data(round(self.start_slider.get()))
 
+            if self.animation_play_state:
+                self.animation_play_state = False
+                self.play_pause_animation()
+
 
     def update_canavs_start_culumns(self, value):
         self.canvas.update_start_columns(round(value))
@@ -90,6 +94,7 @@ class AnimationFrame(tk.Frame):
             self.animation_play_state = False
             self.animation_step_forward_btn.configure(state="normal")
             self.animation_step_back_btn.configure(state="normal")
+            self.canvas.play_pause_animation(1)
 
     def animation_speed(self):
         pass

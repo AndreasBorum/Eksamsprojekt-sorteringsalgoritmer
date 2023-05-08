@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
-import time
-
 
 class CanvasLogic(ABC):
+
 
     def update_start_columns(self, columns):
         """called before the data is generated, to preview columns on the canvas"""
@@ -11,8 +10,17 @@ class CanvasLogic(ABC):
 
     def play_pause_animation(self, speed):
         """called when play/pause  btn is clicked. plays/pauses the animation"""
-        for i in range(10):
-            self.animation_step_forward()
+        print(self.animation_thread)
+        if self.animation_running:
+            print("stops thread")
+            self.animation_thread.stop()
+            self.animation_running = False
+        elif  not self.animation_running:
+            print("starts thread")
+            self.animation_thread.start()
+            self.animation_running = True
+        
+        self.animation_speed = speed
 
 
     def animation_speed(self, speed):
@@ -83,6 +91,7 @@ class CanvasLogic(ABC):
     def generate_data_from_algorithm(self, algorithm, size):
         """called when start btn is clicked. takes the number of columns and calls the algorithm."""
         data = algorithm(size)
+        print(data)
         self.draw_columns_after_start(data[0])
         self.unpack_instruction_steps(data[1])
 

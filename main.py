@@ -3,6 +3,7 @@ import customtkinter as ctk
 from home_page import HomePage
 from intro_page import IntroPage
 from bubble_page import BubblesortPage
+from quick_page import QuickSortPage
 
 
 #https://stackoverflow.com/a/74844868
@@ -50,14 +51,19 @@ class App(ctk.CTk):
         self.bt_Quit.grid(row=9, column=0, padx=20, pady=10)
         
         # button to select correct frame IN self.left_side_panel WIDGET
-        self.bt_dashboard = ctk.CTkButton(self.left_side_panel, text="Home page", command=lambda: self.show_frame(HomePage))
-        self.bt_dashboard.grid(row=1, column=0, padx=20, pady=10)
+        self.bt_home = ctk.CTkButton(self.left_side_panel, text="Home page", command=lambda: self.show_frame(HomePage))
+        self.bt_home.grid(row=1, column=0, padx=20, pady=10)
 
-        self.bt_statement = ctk.CTkButton(self.left_side_panel, text="Intro  page", command=lambda: self.show_frame(IntroPage))
-        self.bt_statement.grid(row=2, column=0, padx=20, pady=10)
+        self.bt_intro = ctk.CTkButton(self.left_side_panel, text="Intro  page", command=lambda: self.show_frame(IntroPage))
+        self.bt_intro.grid(row=2, column=0, padx=20, pady=10)
         
-        self.bt_categories = ctk.CTkButton(self.left_side_panel, text="Manage Categories", command=lambda: self.show_frame(BubblesortPage))
-        self.bt_categories.grid(row=3, column=0, padx=(40,20), pady=10)
+        self.bt_bubblesort = ctk.CTkButton(self.left_side_panel, text="Manage Categories", command=lambda: self.show_frame(BubblesortPage))
+        self.bt_bubblesort.grid(row=3, column=0, padx=(40,20), pady=10)
+
+        self.bt_quicksort = ctk.CTkButton(self.left_side_panel, text="Manage Products", command=lambda: self.show_frame(QuickSortPage))
+        self.bt_quicksort.grid(row=4, column=0, padx=(40,20), pady=10)
+
+
         
 
         # right side panel -> have self.right_dashboard inside it
@@ -74,7 +80,7 @@ class App(ctk.CTk):
   
         # iterating through a tuple consisting
         # of the different page layouts
-        for F in (HomePage, IntroPage, BubblesortPage):
+        for F in (HomePage, IntroPage, BubblesortPage, QuickSortPage):
             frame = F(self)
   
             # initializing frame
