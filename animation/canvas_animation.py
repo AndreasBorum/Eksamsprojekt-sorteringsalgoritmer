@@ -24,7 +24,6 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
 
         self.animation_thread = AnimationThread(self)
         self.animation_running = False
-        self.animation_speed = 1
 
     #------------------------------------------------------------------------------------------
 

@@ -13,19 +13,20 @@ class CanvasLogic(ABC):
         print(self.animation_thread)
         if self.animation_running:
             print("stops thread")
-            self.animation_thread.stop()
+            self.animation_thread.stop_animation()
             self.animation_running = False
         elif  not self.animation_running:
             print("starts thread")
-            self.animation_thread.start()
+            self.animation_thread.start_animation()
             self.animation_running = True
         
-        self.animation_speed = speed
+        self.animation_thread.set_speed(speed)
 
 
-    def animation_speed(self, speed):
+    def set_animation_speed(self, speed):
         """called when the animation speed is changed. Changes the animation speed"""
-        pass
+        print("speed in logic: ",speed)
+        self.animation_thread.set_speed(speed)
 
     def animation_step_forward(self):
         """called when the step forward btn is clicked. moves the animation forward one step"""

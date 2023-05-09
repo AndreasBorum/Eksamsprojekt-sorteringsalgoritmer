@@ -33,8 +33,8 @@ class AnimationFrame(tk.Frame):
         self.play_switch.deselect()
         self.play_switch.grid(row=0, column=0, pady=10, columnspan=2, padx=10, sticky="nsew")
 
-        self.animation_speed = ctk.CTkSlider(self.play_frame, from_=0, to=100, number_of_steps=100, command=self.animation_speed)
-        self.animation_speed.grid(row=1, column=0, pady=10, columnspan=2,padx=10, sticky="nsew")
+        self.animation_speed_slider = ctk.CTkSlider(self.play_frame, from_=0.01, to=2, number_of_steps=100, command=self.animation_speed)
+        self.animation_speed_slider.grid(row=1, column=0, pady=10, columnspan=2,padx=10, sticky="nsew")
 
         self.animation_step_forward_btn = ctk.CTkButton(self.play_frame, text="Step Forward", command=self.animation_step_forward)
         self.animation_step_forward_btn.grid(row=2, column=0, pady=10, padx=10, sticky="nsew")
@@ -57,7 +57,7 @@ class AnimationFrame(tk.Frame):
             self.start_btn.configure(text="Start")
             self.start_slider.configure(state="normal")
             self.play_switch.configure(state="disabled")
-            self.animation_speed.configure(state="disabled")
+            self.animation_speed_slider.configure(state="disabled")
             self.animation_step_forward_btn.configure(state="disabled")
             self.animation_step_back_btn.configure(state="disabled")
 
@@ -68,7 +68,7 @@ class AnimationFrame(tk.Frame):
             self.start_btn.configure(text="Stop")
             self.start_slider.configure(state="disabled")
             self.play_switch.configure(state="normal")
-            self.animation_speed.configure(state="normal")
+            self.animation_speed_slider.configure(state="normal")
             self.animation_step_forward_btn.configure(state="normal")
             self.animation_step_back_btn.configure(state="normal")
 
@@ -88,16 +88,16 @@ class AnimationFrame(tk.Frame):
             self.animation_play_state = True
             self.animation_step_forward_btn.configure(state="disabled")
             self.animation_step_back_btn.configure(state="disabled")
-            self.canvas.play_pause_animation(1)
+            self.canvas.play_pause_animation(self.animation_speed_slider.get())
         else:
             self.play_switch.configure(text="Play")
             self.animation_play_state = False
             self.animation_step_forward_btn.configure(state="normal")
             self.animation_step_back_btn.configure(state="normal")
-            self.canvas.play_pause_animation(1)
+            self.canvas.play_pause_animation(self.animation_speed_slider.get())
 
-    def animation_speed(self):
-        pass
+    def animation_speed(self, speed):
+        self.canvas.set_animation_speed(speed)
 
     def animation_step_forward(self):
         self.canvas.animation_step_forward()
