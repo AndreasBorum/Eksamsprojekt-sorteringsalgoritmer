@@ -34,7 +34,7 @@ class CanvasLogic(ABC):
         if self.step_counter == len(self.instruction_steps):
             self.step_counter -= 1
             return
-
+        
         match self.instruction_steps[self.step_counter]:
             case [0, x, y]:
                 self.clear_color()

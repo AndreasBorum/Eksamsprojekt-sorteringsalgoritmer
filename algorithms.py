@@ -4,43 +4,52 @@
     #   3: Done
 
 def quick_sort_alg(arr, instructions):
-
-    if len(arr) <= 1:
+    if(len(arr) <= 1):
         return arr
     else:
-        pivot = arr[0]
+        pivot = arr[-1]
         less = []
         greater = []
-        for x in arr[1:]:
-            if compare(x, pivot, arr, instructions):
+        for x in arr[:-2]:
+            if(compare(pivot, x, arr, instructions)):
                 less.append(x)
             else:
                 greater.append(x)
-        return quick_sort_alg(less, instructions) + [pivot] + quick_sort_alg(greater, instructions)
+        i = 0
+        for x in less:
+            swap(x, arr[i], arr, instructions)
+            i += 1
+        swap(pivot, arr[i], arr, instructions)
+
+        less = quick_sort_alg(less, instructions)
+        greater = quick_sort_alg(greater, instructions)
+
+        return less + [pivot] + greater
 
 def bubble_sort_alg(arr, instructions):
     for num_of_sorted in range(len(arr)):
         for j in range(len(arr)-num_of_sorted-1):
-            compare(arr[j], arr[j+1], arr, instructions)
+            if(not compare(arr[j], arr[j+1], arr, instructions)):
+                swap(arr[j], arr[j+1], arr, instructions)
 
 
 def compare(x, y, arr, instructions = []):
     """
         Returns true if x <= y
-        Returns false AND swaps x and y if x > y
+        Returns false if x > y
     """
     instructions += [(0, arr.index(x), arr.index(y))]
     if x <= y:
         return True
     else:
-        swap(x, y, arr, instructions)
         return False
 
 def swap(x, y, arr, instructions = []):
-    instructions += [(1, arr.index(x), arr.index(y))]
+    index_x, index_y = arr.index(x), arr.index(y)
+    instructions += [(1, index_x, index_y)]
     temp = x
-    x = y
-    y = temp
+    arr[index_x] = y
+    arr[index_y] = temp
 
 from random import randint as r_int
 def place_x_at_random_index(arr, x):
