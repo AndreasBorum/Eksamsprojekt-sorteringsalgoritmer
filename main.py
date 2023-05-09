@@ -30,12 +30,12 @@ class App(ctk.CTk):
         self.main_container.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         # left side panel -> for frame selection
-        self.left_side_panel = ctk.CTkFrame(self.main_container, width=150, corner_radius=10)
+        self.left_side_panel = ctk.CTkFrame(self.main_container, width=170, corner_radius=10)
         self.left_side_panel.pack(side=tk.LEFT, fill=tk.Y, expand=False, padx=5, pady=5)
         
         self.left_side_panel.grid_columnconfigure(0, weight=1)
-        self.left_side_panel.grid_rowconfigure((0, 1, 2, 3), weight=0)
-        self.left_side_panel.grid_rowconfigure((4, 5), weight=1)
+        self.left_side_panel.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=0)
+        self.left_side_panel.grid_rowconfigure((8), weight=1)
         self.left_side_panel.grid_propagate(0)
         
         
@@ -57,20 +57,20 @@ class App(ctk.CTk):
         self.bt_home = ctk.CTkButton(self.left_side_panel, text="Home page", command=lambda: self.show_frame(HomePage))
         self.bt_home.grid(row=1, column=0, padx=20, pady=10)
 
-        self.bt_intro = ctk.CTkButton(self.left_side_panel, text="Intro  page", command=lambda: self.show_frame(IntroPage))
+        self.bt_intro = ctk.CTkButton(self.left_side_panel, text="Intro page", command=lambda: self.show_frame(IntroPage))
         self.bt_intro.grid(row=2, column=0, padx=20, pady=10)
         
-        self.bt_bubblesort = ctk.CTkButton(self.left_side_panel, text="Manage Categories", command=lambda: self.show_frame(BubblesortPage))
+        self.bt_bubblesort = ctk.CTkButton(self.left_side_panel, text="Bubble sort", command=lambda: self.show_frame(BubblesortPage))
         self.bt_bubblesort.grid(row=3, column=0, padx=(40,20), pady=10)
 
-        self.bt_quicksort = ctk.CTkButton(self.left_side_panel, text="Manage Products", command=lambda: self.show_frame(QuickSortPage))
+        self.bt_quicksort = ctk.CTkButton(self.left_side_panel, text="Quick sort", command=lambda: self.show_frame(QuickSortPage))
         self.bt_quicksort.grid(row=4, column=0, padx=(40,20), pady=10)
 
 
         
 
         # right side panel -> have self.right_dashboard inside it
-        self.right_side_panel = ctk.CTkFrame(self.main_container, corner_radius=10, fg_color="#000811")
+        self.right_side_panel = ctk.CTkFrame(self.main_container, corner_radius=10, fg_color="gray85")
         self.right_side_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=5, pady=5)
 
         self.right_side_panel.grid_rowconfigure(0, weight = 1)
@@ -91,7 +91,7 @@ class App(ctk.CTk):
   
             frame.grid(in_=self.right_side_panel, row = 0, column = 0, sticky ="nsew")          
 
-        self.show_frame(BubblesortPage)
+        self.show_frame(HomePage)
 
 
     # to display the current frame passed as

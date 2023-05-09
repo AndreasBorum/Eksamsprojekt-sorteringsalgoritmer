@@ -7,7 +7,7 @@ class AlgorithmPage(ctk.CTkFrame):
     def __init__(self, app, algoritmn_type):
         super().__init__(app, **style.frame_style)
         self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=1)
+        #self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
         self.animation_frame = AnimationFrame(self, algoritmn_type)
