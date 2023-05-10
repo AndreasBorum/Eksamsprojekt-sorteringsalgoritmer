@@ -24,7 +24,7 @@ class AnimationThread():
 
     def set_speed(self, speed):
         with self.lock:
-            self.animation_speed = speed
+            self.animation_speed = self.speed_func(speed)
 
     def close_thread(self):
         print("closing thread")
@@ -47,3 +47,8 @@ class AnimationThread():
             sleep(0.1)
         print("thread closed")
         return
+    
+    def speed_func(self, speed):
+        new_speed = 1.09**speed*0.1-(0.1-0.005)
+        print(new_speed)
+        return new_speed

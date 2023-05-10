@@ -45,7 +45,7 @@ class AnimationFrame(tk.Frame):
 
         speed_slider_label = ctk.CTkLabel(self.play_frame, text="Animation speed:")
         speed_slider_label.grid(row=1, column=0, padx = 10 , pady=(10,0))
-        self.animation_speed_slider = ctk.CTkSlider(self.play_frame, from_=0.01, to=2, number_of_steps=100, command=self.animation_speed)
+        self.animation_speed_slider = ctk.CTkSlider(self.play_frame, from_=35, to=0, number_of_steps=100, command=self.animation_speed)
         self.animation_speed_slider.grid(row=2, column=0, pady=(0,10), columnspan=2,padx=10, sticky="nsew")
 
         self.animation_step_back_btn = ctk.CTkButton(self.play_frame, text="<-- Step", command=self.animation_step_back)
