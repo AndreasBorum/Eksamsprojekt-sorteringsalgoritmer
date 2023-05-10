@@ -1,0 +1,1 @@
+Welcome. This is a simple program desgined to teach and demonstrade what algorithems are, trhoug sorting algorithems. Start by reading the introduction to algorithem, and then explore different sorting alogirithem.

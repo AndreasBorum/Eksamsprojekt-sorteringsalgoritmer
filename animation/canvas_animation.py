@@ -52,7 +52,7 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
     def draw_columns_after_start(self, data):
         """draws columns on the canvas"""
         self.canvas.delete("all")
-        self.data = data
+        self.data = data[:]
 
         self.columns=[]
 
@@ -107,6 +107,8 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
         """function to set the color of all rectangles to green"""
         for i in self.columns:
             self.canvas.itemconfig(i[0], fill='green')
+        if self.master.animation_play_state:
+                self.master.play_pause_animation()
 
 #https://stackoverflow.com/questions/66918142/another-method-to-move-canvas-objects
 def abs_move(self, _object, new_x, new_y):

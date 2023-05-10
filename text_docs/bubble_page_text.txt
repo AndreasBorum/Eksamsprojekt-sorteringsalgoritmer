@@ -1,0 +1,9 @@
+The simplest sorting algorithm is bubble sort. It has its name from the sort of bubbling effect it creates, where the biggest element bubbles to the top. To understand the algorithm, look at the flowchart and read the description below here, but more important, play with it on the right.
+
+
+animation mechanics 
+
+
+bubble sort explaination 
+
+flowchart explaination

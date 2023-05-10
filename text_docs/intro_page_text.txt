@@ -1,0 +1,22 @@
+Computer algorithms are like recipes for computers. Just as a recipe tells you how to prepare a food, an algorithm tells a computer how to perform a particular task.
+
+An algorithm is a step-by-step procedure for solving a problem, usually expressed in a computer programming language. It's a set of instructions that a computer follows to complete a task or solve a problem.
+
+Algorithms are used in many areas of computer science, including artificial intelligence, machine learning, cryptography, and data analysis. They are also used in everyday applications such as search engines, email filters, and social media recommendations.
+
+Although algorithms can be complex, but they are often built from simple building blocks, such as loops, conditionals, and variables. These building blocks are combined in different ways to create more complex algorithms that can solve more difficult problems.
+
+Understanding algorithms is important for anyone interested in computer science or technology. It can help you design and develop software, improve the performance of existing systems, and solve problems in new and innovative ways.
+
+This program will demostrade different sorting algorithms, so you can learn the princepilces of algorithms. 
+
+
+To visualize algorithms something called a flowchart is used. On the picture to the right is show an example, and it can be understood in these steps:
+
+Step 1: Declare number N= 0 and sum= 0
+Step 2: Determine N by N= N+1
+Step 3: Calculate the sum by the formula: Sum= N + Sum.
+Step 4: Add a loop between steps 2 and 3 until N= 50.
+Step 5: Print Sum.
+
+(from https://www.edrawsoft.com/algorithm-flowchart-examples.html)

@@ -1,0 +1,10 @@
+Quicksort is a fast sorting algorithm that works by splitting a large array of data into smaller sub-arrays. This implies that each iteration works by splitting the input into two components, sorting them, and then recombining them.
+The quick sort algorithm can be summarized in three steps:
+
+-Pick: Select a pivot.
+-Divide: Split the problem set, move smaller parts to the left of the pivot and larger items to the right.
+-Repeat and combine: Repeat the steps and combine the arrays that have previously been sorted.
+
+(From: https://towardsdatascience.com/an-overview-of-quicksort-algorithm-b9144e314a72)
+
+To get a deep understanding of the algorithm watch this video:

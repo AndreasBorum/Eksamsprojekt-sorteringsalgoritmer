@@ -10,7 +10,6 @@ class CanvasLogic(ABC):
 
     def play_pause_animation(self, speed):
         """called when play/pause  btn is clicked. plays/pauses the animation"""
-        print(self.animation_thread)
         if self.animation_running:
             print("stops thread")
             self.animation_thread.stop_animation()
@@ -25,7 +24,6 @@ class CanvasLogic(ABC):
 
     def set_animation_speed(self, speed):
         """called when the animation speed is changed. Changes the animation speed"""
-        print("speed in logic: ",speed)
         self.animation_thread.set_speed(speed)
 
     def animation_step_forward(self):
@@ -91,10 +89,13 @@ class CanvasLogic(ABC):
 
     def generate_data_from_algorithm(self, algorithm, size):
         """called when start btn is clicked. takes the number of columns and calls the algorithm."""
-        data = algorithm(size)
-        print(data)
-        self.draw_columns_after_start(data[0])
-        self.unpack_instruction_steps(data[1])
+        self.data1 = algorithm(size)
+        #print(self.data)
+        self.draw_data()
+
+    def draw_data(self):
+        self.draw_columns_after_start(self.data1[0])
+        self.unpack_instruction_steps(self.data1[1])
 
     # ----------------- abstract methods -----------------
 
