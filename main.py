@@ -36,7 +36,7 @@ class App(ctk.CTk):
         
         self.left_side_panel.grid_columnconfigure(0, weight=1)
         self.left_side_panel.grid_rowconfigure((0, 1, 2, 3, 4, 5), weight=0)
-        self.left_side_panel.grid_rowconfigure((8), weight=1)
+        self.left_side_panel.grid_rowconfigure((6), weight=1)
         self.left_side_panel.grid_propagate(0)
         
         
@@ -44,6 +44,16 @@ class App(ctk.CTk):
         self.logo_label = ctk.CTkLabel(self.left_side_panel, text="Welcome! \n", font=ctk.CTkFont(size=20, weight="bold"))
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
         
+        self.scaling_label = ctk.CTkLabel(self.left_side_panel, text="UI Scaling:", anchor="w")
+        self.scaling_label.grid(row=7, column=0, padx=20, pady=(10, 0))
+        
+        self.scaling_optionemenu = ctk.CTkOptionMenu(self.left_side_panel, values=["80%", "90%", "100%", "110%", "120%"],
+                                                            command=self.change_scaling_event)
+        self.scaling_optionemenu.grid(row=8, column=0, padx=20, pady=(10, 20), sticky = "s")
+
+
+
+
         self.bt_Quit = ctk.CTkButton(self.left_side_panel, text="Quit", fg_color= '#EA0000', hover_color = '#B20000', command= self.close_window)
         self.bt_Quit.grid(row=9, column=0, padx=20, pady=10)
         
@@ -99,10 +109,19 @@ class App(ctk.CTk):
             frame.animation_frame.canvas.animation_thread.set_on_page()
         frame.tkraise()
 
+
     def show_frame_by_number(self, i):
          self.show_frame((HomePage, IntroPage, BubblesortPage, QuickSortPage, BigOPage)[i])
         
         
+    # Change scaling of all widget 80% to 120%
+    def change_scaling_event(self, new_scaling: str):
+        new_scaling_float = int(new_scaling.replace("%", "")) / 100
+        ctk.set_widget_scaling(new_scaling_float)
+
+
+
+
     # close the entire window    
     def close_window(self): 
             self.frames[BubblesortPage].animation_frame.canvas.animation_thread.close_thread()
