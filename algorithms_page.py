@@ -14,11 +14,14 @@ class AlgorithmPage(ctk.CTkFrame):
         self.animation_frame.grid(row=0, column=1, pady=10, padx=10, sticky="nsew")
 
 
-        self.description_frame = tk.Frame(self, highlightbackground="blue", highlightthickness=2)
+        self.description_frame = tk.Frame(self)
         self.description_frame.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
 
         self.description_frame.grid_columnconfigure(0, weight=1)
 
 
         self.header_label = ctk.CTkLabel(self.description_frame, text_color="black", font=ctk.CTkFont(size=20, weight="bold"))
-        self.header_label.grid(row=0, column=0, pady=10, padx=10, sticky="ew")
+        self.header_label.grid(row=0, column=0, columnspan=2,  pady=10, padx=10, sticky="ew")
+
+
+        

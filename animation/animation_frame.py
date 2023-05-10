@@ -5,8 +5,9 @@ from animation.canvas_animation import CanvasAnimation
 
 class AnimationFrame(tk.Frame):
     def __init__(self, parent, sorting_type):
-        super().__init__(parent, highlightbackground="blue", highlightthickness=2)
+        super().__init__(parent)
         self.grid_columnconfigure((0,1), weight=1)
+        self.grid_rowconfigure((0), weight=1)
 
         self.animation_state = False
         self.animation_play_state = False
@@ -16,7 +17,7 @@ class AnimationFrame(tk.Frame):
 
 
         self.start_frame = ctk.CTkFrame(self)
-        self.start_frame.grid(row=1, column=0, pady=10, padx=10, sticky="nsew")
+        self.start_frame.grid(row=1, column=0, pady=10, padx=10, sticky="snew")
 
         self.start_btn = ctk.CTkButton(self.start_frame, text="Start", command=self.start_stop_animation)
         self.start_btn.grid(row=0, column=0, pady=10, padx=10, sticky="nsew")
@@ -28,7 +29,7 @@ class AnimationFrame(tk.Frame):
 
 
         self.play_frame = ctk.CTkFrame(self)
-        self.play_frame.grid(row=1, column=1, pady=10, padx=10, sticky="nsew")
+        self.play_frame.grid(row=1, column=1, pady=10, padx=10, sticky="snew")
 
         #self.switch_var = ctk.StringVar(value="on")
         #self.play_pause_btn = ctk.CTkSwitch(self.play_frame, text="Play", command=self.play_pause_animation, variable=self.switch_var, onvalue="on", offvalue="off")

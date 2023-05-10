@@ -30,17 +30,17 @@ class HomePage(ctk.CTkFrame):
         image_height = 70
 
         intro_image = ctk.CTkImage(Image.open("images\placeholder-image.png"), size=(56, image_height))
-        intro_btn = ctk.CTkButton(menu_frame, image= intro_image , text="")
+        intro_btn = ctk.CTkButton(menu_frame, image= intro_image , text="", command=lambda:app.show_frame_by_number(1))
         intro_btn.grid(row=0, column=0, columnspan=5, padx=10, pady=10)
 
         ctk.CTkFrame(menu_frame, corner_radius=1, height=3).grid(row=1, column=0, columnspan=5, pady=10, padx=40, sticky="ew")
 
         bubble_image = ctk.CTkImage(Image.open("images\placeholder-image.png"), size=(56, image_height))
-        bubble_btn = ctk.CTkButton(menu_frame, image= bubble_image , text="")
+        bubble_btn = ctk.CTkButton(menu_frame, image= bubble_image , text="", command=lambda:app.show_frame_by_number(2))
         bubble_btn.grid(row=2, column=0, padx=10, pady=10)
 
         quick_image = ctk.CTkImage(Image.open("images\placeholder-image.png"), size=(56, image_height))
-        quick_btn = ctk.CTkButton(menu_frame, image= quick_image , text="")
+        quick_btn = ctk.CTkButton(menu_frame, image= quick_image , text="", command=lambda:app.show_frame_by_number(3))
         quick_btn.grid(row=2, column=1, padx=10, pady=10)
 
         coming_soon_image = ctk.CTkImage(Image.open("images\placeholder-image.png"), size=(56, image_height))
@@ -50,5 +50,5 @@ class HomePage(ctk.CTkFrame):
         ctk.CTkFrame(menu_frame, corner_radius=1, height=3).grid(row=3, column=0, columnspan=5, pady=10, padx=40, sticky="ew")
 
         big_o_image = ctk.CTkImage(Image.open("images\placeholder-image.png"), size=(56, image_height))
-        big_o_btn = ctk.CTkButton(menu_frame, image= big_o_image , text="")
+        big_o_btn = ctk.CTkButton(menu_frame, image= big_o_image , text="", command=lambda:app.show_frame_by_number(4))
         big_o_btn.grid(row=4, column=0, columnspan=5, padx=10, pady=10)

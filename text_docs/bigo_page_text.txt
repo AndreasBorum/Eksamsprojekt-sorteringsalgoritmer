@@ -1,0 +1,11 @@
+
+At its most basic level, Big O notation defines how long it takes an algorithm to run, also called time complexity. It represents how long the runtime for a given algorithm can be as the data grows larger. You may be wondering why anyone cares enough to calculate the speed of an algorithm except to show off, but as programs grow in size, these tiny baby milliseconds add up! Suddenly an algorithm that used to take no time at all starts to bog everything down, so programmers need to know what the “worst-case scenario” is, or rather, the slowest an algorithm will run given a growing list of data.
+The O basically stands for order, as in orders of magnitude. It might be helpful to think of the letter O here as similar to growth rate.
+
+The best time complexity in Big O notation is O(1). This includes algorithms that take pretty much the same amount of time to run no matter how long or short a list.
+O(n) gets a little more complicated, the variable “n” being the size of the data you are working on. This usually represents an algorithm that has to sort through each item in a list to find the one it’s looking for, or ones where the algorithm uses each item and alters or combines them in some way. Some people call these brute force algorithms because of the way they go through each item no matter what. O(n) is also called linear time.
+Besides these, there are a couple of other types. The chart on the right can give you a visual understanding of all of them.
+
+The sorting algorithms demonstrated in this program are all O(n^2). There are more efficient sorting algorithms, but they are much more complicated. 
+
+(from https://betterprogramming.pub/big-o-notation-for-dummies-like-me-98ac2d141f9f)
