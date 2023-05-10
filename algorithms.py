@@ -54,7 +54,7 @@ def compare(x, y, arr, instructions = []):
         Returns true if x <= y
         Returns false if x > y
     """
-    instructions += [(0, arr.index(x), arr.index(y))]
+    instructions += [(0, x, y)]
     if x <= y:
         return True
     else:
@@ -64,7 +64,7 @@ def swap(x, y, arr, instructions = []):
     print(x, y)
     
     index_x, index_y = arr.index(x), arr.index(y)
-    instructions += [(1, index_x, index_y)]
+    instructions += [(1, x, y)]
     temp = x
     arr[index_x] = y
     arr[index_y] = temp
@@ -97,10 +97,10 @@ def quick_sort(len):
         2: A list of instructions from the quicksort algorithm.
     """
 
-    originalArray = create_array(len)
+    original_array = create_array(len)
     arr = []
     
-    for x in originalArray:
+    for x in original_array:
         arr += [x]
 
     instructions = []
@@ -108,7 +108,8 @@ def quick_sort(len):
 
     arr = quick_sort_alg(arr, instructions)
     instructions += [[3]]
-    return originalArray, instructions, arr
+
+    return original_array, reformat_instructions(original_array, instructions) #, arr
 
 
 def bubble_sort(len):
@@ -118,10 +119,10 @@ def bubble_sort(len):
         1: The shuffled array
         2: A list of instructions from the bubblesort algorithm.
     """
-    originalArray = create_array(len)
+    original_array = create_array(len)
     arr = []
     
-    for x in originalArray:
+    for x in original_array:
         arr += [x]
 
     instructions = []
@@ -130,9 +131,27 @@ def bubble_sort(len):
     arr = bubble_sort_alg(arr, instructions)
     instructions += [[3]]
 
-    return originalArray, instructions
+    return original_array, reformat_instructions(original_array, instructions)
 
+def reformat_instructions(original_array, instructions):
+    # print(f"imputted instructions: {instructions}")
+    new_array = original_array[:]
+    new_instructions = []
+    for inst in instructions:
+        if(inst[0] == 0):
+            new_instructions += [(0, new_array.index(inst[1]), new_array.index(inst[2]))]
+        elif(inst[0] == 1):
+            new_instructions += [(1, new_array.index(inst[1]), new_array.index(inst[2]))]
 
-for _ in range (1):
-    res = quick_sort(5)
-    print(res[0], res[2], res[1])
+            index1 = new_array.index(inst[1])
+            index2 = new_array.index(inst[2])
+
+            new_array[index1], new_array[index2] = new_array[index2], new_array[index1]
+
+            # print (f"New arr: {new_array}")
+    new_instructions.append([3])
+    return new_instructions
+
+# for _ in range (1):
+#     res = quick_sort(5)
+#     print(res[0], res[2], res[1])
