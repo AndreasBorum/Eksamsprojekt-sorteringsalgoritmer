@@ -18,7 +18,8 @@ def quick_sort_alg(arr, instructions):
                 break
         if(pivot_is_smallest):
             swap(pivot, arr[0], arr, instructions)
-            return [pivot] + quick_sort_alg(arr[1:], instructions)
+            greater = quick_sort_alg(arr[1:], instructions)
+            return [pivot] + greater
 
         for j in range(len(arr[:-1])):
             if(compare(arr[j], pivot, arr, instructions)):
@@ -34,8 +35,9 @@ def quick_sort_alg(arr, instructions):
 
         swap(arr[i+1], pivot, arr, instructions)
 
-        
-        return quick_sort_alg(arr[:arr.index(pivot)], instructions) + [pivot] + quick_sort_alg(arr[arr.index(pivot)+1:], instructions)
+        less = quick_sort_alg(arr[:arr.index(pivot)], instructions)
+        greater = quick_sort_alg(arr[arr.index(pivot)+1:], instructions)
+        return less + [pivot] + greater
 
 
 
@@ -59,6 +61,8 @@ def compare(x, y, arr, instructions = []):
         return False
 
 def swap(x, y, arr, instructions = []):
+    print(x, y)
+    
     index_x, index_y = arr.index(x), arr.index(y)
     instructions += [(1, index_x, index_y)]
     temp = x
@@ -85,7 +89,6 @@ def create_array(len):
             
     return arr
 
-
 def quick_sort(len):
     """
         This is the funtion used by other modules in the program.
@@ -105,7 +108,7 @@ def quick_sort(len):
 
     arr = quick_sort_alg(arr, instructions)
     instructions += [[3]]
-    return originalArray, instructions #, arr
+    return originalArray, instructions, arr
 
 
 def bubble_sort(len):
@@ -130,6 +133,6 @@ def bubble_sort(len):
     return originalArray, instructions
 
 
-#for _ in range (100):
-#    res = quick_sort(10)
-#    print(res[0], res[2])
+for _ in range (1):
+    res = quick_sort(5)
+    print(res[0], res[2], res[1])
