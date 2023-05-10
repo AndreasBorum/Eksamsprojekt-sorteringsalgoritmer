@@ -7,24 +7,45 @@ def quick_sort_alg(arr, instructions):
     if(len(arr) <= 1):
         return arr
     else:
-        pivot = arr[-1]
+        '''
         less = []
         greater = []
-        for x in arr[:-2]:
-            if(compare(pivot, x, arr, instructions)):
-                less.append(x)
+        pivot = arr[-1]
+
+        for element in arr[:-1]:
+            if(compare(element, pivot, arr, instructions)):
+                less += [element]
             else:
-                greater.append(x)
+                greater += [element]
+        
+        arr = less + [pivot] + greater
+        
+        return quick_sort_alg(less, instructions) + [pivot] + quick_sort_alg(greater, instructions)
+        '''
+        pivot = arr[-1]
         i = 0
-        for x in less:
-            swap(x, arr[i], arr, instructions)
-            i += 1
-        swap(pivot, arr[i], arr, instructions)
+        for j in range(len(arr[:-1])):
+            stop_loop = False
+            if(compare(arr[j], pivot, arr, instructions)):
+                while (stop_loop == False):
+                    if(compare(pivot, arr[i], arr, instructions)):
+                        swap(arr[i], arr[j], arr, instructions)
+                        stop_loop = True
+                    else:
+                        
+                        if(i >= j):
+                            stop_loop = True
+                        else:
+                            i += 1
+        if(i < len(arr)-1):
+            swap(arr[i+1], pivot, arr, instructions)
+        
+        return arr, f"pivot: {pivot}", f"indexLess: {i}", f"indexGreater: {j}"
+        
+        #If the pivot is the smallest element in the array, it will be misplaced as the next-smallest
 
-        less = quick_sort_alg(less, instructions)
-        greater = quick_sort_alg(greater, instructions)
 
-        return less + [pivot] + greater
+
 
 def bubble_sort_alg(arr, instructions):
     for num_of_sorted in range(len(arr)):
@@ -92,7 +113,7 @@ def quick_sort(len):
     arr = quick_sort_alg(arr, instructions)
     instructions += [[3]]
 
-    return originalArray, instructions
+    return originalArray, instructions, arr
 
 
 def bubble_sort(len):
@@ -115,3 +136,5 @@ def bubble_sort(len):
     instructions += [[3]]
 
     return originalArray, instructions
+
+print(quick_sort(10))
