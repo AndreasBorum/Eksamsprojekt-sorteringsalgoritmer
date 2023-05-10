@@ -109,8 +109,9 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
 
 
 
-# https://stackoverflow.com/questions/66918142/another-method-to-move-canvas-objects
+
 def abs_move(self, _object, new_x, new_y):
+    #this function is a modified version of:https://stackoverflow.com/questions/66918142/another-method-to-move-canvas-objects
     # Get the current object position
     x, y, *_ = self.bbox(_object)
     # Move the object

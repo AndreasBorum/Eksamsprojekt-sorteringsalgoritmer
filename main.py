@@ -8,7 +8,7 @@ from quick_page import QuickSortPage
 from bigo_page import BigOPage
 
 
-# https://stackoverflow.com/a/74844868
+# this script is a modified version of: https://stackoverflow.com/a/74844868
 
 DARK_MODE = "dark"
 ctk.set_appearance_mode(DARK_MODE)
@@ -20,7 +20,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("Change Frames")
+        self.title("Sorting Algorithems")
         self.geometry("800x600+10+10")
         self.after(0, lambda: self.state('zoomed'))
         self.protocol("WM_DELETE_WINDOW", self.close_window)

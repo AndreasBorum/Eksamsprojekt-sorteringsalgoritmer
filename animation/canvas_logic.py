@@ -26,7 +26,7 @@ class CanvasLogic(ABC):
         self.animation_thread.set_speed(speed)
 
     def animation_step_forward(self):
-        """called when the step forward btn is clicked. moves the animation forward one step"""
+        """moves the animation forward one step"""
         self.step_counter += 1
 
         if self.step_counter == len(self.instruction_steps):
@@ -50,7 +50,7 @@ class CanvasLogic(ABC):
                     self.instruction_steps[self.step_counter])
 
     def animation_step_back(self):
-        """called when the step back btn is clicked. moves the animation back one step"""
+        """moves the animation back one step"""
         self.step_counter -= 1
 
         if self.step_counter == -1:
