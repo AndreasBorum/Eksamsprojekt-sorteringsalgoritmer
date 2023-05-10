@@ -7,42 +7,35 @@ def quick_sort_alg(arr, instructions):
     if(len(arr) <= 1):
         return arr
     else:
-        '''
-        less = []
-        greater = []
-        pivot = arr[-1]
-
-        for element in arr[:-1]:
-            if(compare(element, pivot, arr, instructions)):
-                less += [element]
-            else:
-                greater += [element]
-        
-        arr = less + [pivot] + greater
-        
-        return quick_sort_alg(less, instructions) + [pivot] + quick_sort_alg(greater, instructions)
-        '''
         pivot = arr[-1]
         i = 0
+
+        # Check if pivot is the smallest element
+        pivot_is_smallest = True
+        for k in arr:
+            if(k < pivot):
+                pivot_is_smallest = False
+                break
+        if(pivot_is_smallest):
+            swap(pivot, arr[0], arr, instructions)
+            return [pivot] + quick_sort_alg(arr[1:], instructions)
+
         for j in range(len(arr[:-1])):
-            stop_loop = False
             if(compare(arr[j], pivot, arr, instructions)):
-                while (stop_loop == False):
+                while (True):
                     if(compare(pivot, arr[i], arr, instructions)):
                         swap(arr[i], arr[j], arr, instructions)
-                        stop_loop = True
+                        break
                     else:
-                        
                         if(i >= j):
-                            stop_loop = True
+                            break
                         else:
                             i += 1
-        if(i < len(arr)-1):
-            swap(arr[i+1], pivot, arr, instructions)
+
+        swap(arr[i+1], pivot, arr, instructions)
+
         
-        return arr, f"pivot: {pivot}", f"indexLess: {i}", f"indexGreater: {j}"
-        
-        #If the pivot is the smallest element in the array, it will be misplaced as the next-smallest
+        return quick_sort_alg(arr[:arr.index(pivot)], instructions) + [pivot] + quick_sort_alg(arr[arr.index(pivot)+1:], instructions)
 
 
 
@@ -112,8 +105,7 @@ def quick_sort(len):
 
     arr = quick_sort_alg(arr, instructions)
     instructions += [[3]]
-
-    return originalArray, instructions, arr
+    return originalArray, instructions #, arr
 
 
 def bubble_sort(len):
@@ -137,4 +129,7 @@ def bubble_sort(len):
 
     return originalArray, instructions
 
-print(quick_sort(10))
+
+#for _ in range (100):
+#    res = quick_sort(10)
+#    print(res[0], res[2])
