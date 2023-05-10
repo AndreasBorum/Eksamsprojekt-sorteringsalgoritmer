@@ -1,7 +1,7 @@
-The simplest sorting algorithm is bubble sort. It has its name from the sort of bubbling effect it creates, where the biggest element bubbles to the top. To understand the algorithm, look at the flowchart and read the description below here, but more important, play with it on the right.
+The simplest sorting algorithm is bubble sort. It has its name from the sort of bubbling effect it creates, where the biggest element bubbles to the top. To understand the algorithm, look at the flowchart and read the description below here, but more importantly, play with it on the right.
 
 
-The animation works by first selecting the number of columns and pressing start. You can when take one step at a time or animate the steps. 
+The animation works by first selecting the number of columns and pressing start. You can take one step at a time or animate the algorithm. 
 
 
 1. First Iteration (Compare and Swap)
@@ -15,4 +15,4 @@ The animation works by first selecting the number of columns and pressing start.
 
 The same process goes on for the remaining iterations.
 After each iteration, the largest element among the unsorted elements is placed at the end.
-It is therefore not necessary to check the D last element after D iterations.
+It is therefore not necessary to check the last elements every iterations.

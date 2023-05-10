@@ -1,4 +1,4 @@
-Computer algorithms are like recipes for computers. Just as a recipe tells you how to prepare a food, an algorithm tells a computer how to perform a particular task.
+Computer algorithms are like recipes for computers. Just like a recipe tells you how to prepare a food, an algorithm tells a computer how to perform a particular task.
 
 An algorithm is a step-by-step procedure for solving a problem, usually expressed in a computer programming language. It's a set of instructions that a computer follows to complete a task or solve a problem.
 
