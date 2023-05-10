@@ -5,7 +5,7 @@ from algorithms import bubble_sort
 class BubbleSortLogic(CanvasLogic):
     def __init__(self) -> None:
         super().__init__()
-    
+
     def generate_data(self, size):
         """called when start btn is clicked. takes the number of columns and calls the algorithm."""
         self.generate_data_from_algorithm(bubble_sort, size)

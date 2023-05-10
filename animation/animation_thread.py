@@ -1,6 +1,7 @@
 from time import sleep
 from threading import Event, Thread, Lock
 
+
 class AnimationThread():
     def __init__(self, CanvasLogic):
         self.CanvasLogic = CanvasLogic
@@ -31,7 +32,7 @@ class AnimationThread():
         self.app_running.set()
         self.on_page.clear()
         self.running.clear()
-        
+
     def __str__(self) -> str:
         return "AnimationThread"
 
@@ -47,7 +48,7 @@ class AnimationThread():
             sleep(0.1)
         print("thread closed")
         return
-    
+
     def speed_func(self, speed):
         new_speed = 1.09**speed*0.1-(0.1-0.005)
         print(new_speed)
