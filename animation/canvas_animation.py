@@ -9,7 +9,7 @@ class CanvasAnimation(tk.Frame, CanvasLogic):
         super().__init__(master)
         self.master = master
         self.cx, self.cy = 500, 400
-        self.canvas = tk.Canvas(self, width=self.cx, height=self.cy, bg='yellow')
+        self.canvas = tk.Canvas(self, width=self.cx, height=self.cy)
         self.canvas.pack()
 
 
